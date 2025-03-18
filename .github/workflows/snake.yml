@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - main  # Ensure this matches your actual branch name
 
 jobs:
   generate:
@@ -15,7 +15,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-        
+
+      - name: Set Git User
+        run: |
+          git config --global user.email "your_email@example.com"
+          git config --global user.name "Your Name"
+
       - name: Generate GitHub Contributions Snake Animations
         uses: Platane/snk@v3
         with:
@@ -27,13 +32,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check if `dist` exists
-        run: |
-          if [ ! -d "dist" ]; then
-            echo "Error: dist directory not found!"
-            exit 1
-          fi
-      
       - name: Ensure Output Branch Exists
         run: |
           git fetch origin
@@ -49,7 +47,7 @@ jobs:
       - name: Deploy to Output Branch
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GH_PAT }}  # Use a personal access token
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: output
           commit_message: "Update snake animation [skip ci]"
