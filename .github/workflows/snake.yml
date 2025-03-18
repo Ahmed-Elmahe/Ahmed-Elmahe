@@ -26,6 +26,13 @@ jobs:
             dist/ocean.gif?color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check if `dist` exists
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "Error: dist directory not found!"
+            exit 1
+          fi
       
       - name: Ensure Output Branch Exists
         run: |
@@ -42,7 +49,7 @@ jobs:
       - name: Deploy to Output Branch
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # FIXED HERE
+          github_token: ${{ secrets.GH_PAT }}  # Use a personal access token
           publish_dir: ./dist
           publish_branch: output
           commit_message: "Update snake animation [skip ci]"
