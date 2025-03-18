@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-
+        
       - name: Generate GitHub Contributions Snake Animations
         uses: Platane/snk@v3
         with:
@@ -26,23 +26,23 @@ jobs:
             dist/ocean.gif?color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create branch if not exists
+      
+      - name: Ensure Output Branch Exists
         run: |
           git fetch origin
           if ! git rev-parse --verify origin/output; then
-            git checkout -b output
+            git checkout --orphan output
+            git reset --hard
+            git commit --allow-empty -m "Initial commit"
             git push origin output
           else
             git checkout output
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to Output Branch
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }} # FIXED HERE
           publish_dir: ./dist
           publish_branch: output
           commit_message: "Update snake animation [skip ci]"
