@@ -1,6 +1,6 @@
 # 💫 About Me:
 
-I am a student at Tanta University's Faculty of Engineering, <br>specializing in the Mechanical Power Department. Outside of my <br>formal studies, I pursue a strong interest in computer science, focusing <br>on web and mobile application development. I am an expert in Python, <br>JavaScript, Dart, and PHP, continuously expanding my skill set in <br>software development. Welcome to my GitHub profile!
+I am a student at Tanta University's Faculty of Engineering, <br>specializing in the Mechanical Power Department. Outside of my <br>formal studies, I pursue a strong interest in computer science, focusing <br>on web and mobile application development. I am an expert in C/C++, Python, Java, <br>JavaScript, Go, and PHP, continuously expanding my skill set in <br>software development. Welcome to my GitHub profile!
 
 ## 🌐 Socials:
 
